@@ -1,10 +1,5 @@
 <template>
-  <!-- <v-app>
-    <v-main>
-      <HelloWorld />
-    </v-main>
-  </v-app> -->
-  <v-card
+  <!-- <v-card
     class="mx-auto my-8"
     max-width="344"
     elevation="16"
@@ -21,9 +16,25 @@
     <v-card-text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </v-card-text>
-  </v-card>
+  </v-card> -->
+  <MenuInterface />
+  <!-- <PlayingCard
+    :cardRef="cardRef"
+  /> -->
 </template>
 
-<script setup>
-  //
+<script>
+  import PlayingCard from "./components/Cards.vue"
+  import MenuInterface from "./components/Menu.vue"
+
+  export default {
+    components: {
+      MenuInterface,
+      PlayingCard
+    },
+
+    data: () => ({
+      cardRef: 'src/assets/cards/EichelAcht.png',
+    }),
+  }
 </script>
