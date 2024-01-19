@@ -1,4 +1,5 @@
 <template>
+  <div>
     <v-container v-if="!statsDisplayed">
       <div><h1>Neunerln</h1><hr><br/></div>
       <v-row>
@@ -41,7 +42,8 @@
       </v-row>
     </v-container>
     <StatInterface v-if="statsDisplayed" />
-  </template>
+  </div>
+</template>
     
   <script>
     import StatInterface from './StatInterface.vue';

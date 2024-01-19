@@ -4,6 +4,7 @@
     >
       <v-img
         src="../assets/cards/GrasOber.png"
+        @click="drawCard"
       ></v-img>
     </v-col>
   </template>
@@ -12,7 +13,7 @@
     export default {
       name: "PlayingCard",
       props: {
-        cardRef: String,
+        cards: Array
       },
   
       data: () => ({
@@ -20,7 +21,10 @@
       }),
   
       methods: {
-  
+        drawCard () {
+          const randomCard = this.cards[Math.floor(Math.random() * max)]
+          console.log(randomCard)
+        }
       }
     }
   </script>

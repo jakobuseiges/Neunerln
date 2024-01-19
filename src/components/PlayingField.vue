@@ -14,7 +14,9 @@
             src="../assets/cards/EichelAcht.png"
           ></v-img>
         </v-col>
-        <CardStack />
+        <CardStack 
+          :cards="cards"
+        />
       </v-row>
       <v-divider color="warning" thickness="6px" class="mb-5 mt-5"></v-divider>
       <v-row id="player2-hand" class="player-hand">
@@ -30,15 +32,30 @@
   <script>
     import CardStack from './Cardstack.vue'
     export default {
+      name: "PlayingField",
       components: {
         CardStack
       },
 
+      props: {
+        cards: Array
+      },
+
+      created () {
+        this.createCards()
+      },
+
       data () {
         return {
-
+          
         }
       },
+
+      methods: {
+        createCards () {
+          this.$emit('createCards')
+        }
+      }
     }
   </script>
   
