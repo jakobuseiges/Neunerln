@@ -3,7 +3,7 @@
       class="playing-card"
     >
       <v-img
-        :src="cardRef"
+        src="../assets/cards/GrasOber.png"
       ></v-img>
     </v-col>
   </template>
