@@ -1,8 +1,8 @@
 <template>
-  <div>
+<div>
     <v-container v-if="!statsDisplayed">
-      <div><h1>Neunerln</h1><hr><br/></div>
-      <v-row>
+      <div class="center"><h1>Neunerln</h1><hr><br/></div>
+      <v-row justify="center">
         <v-col cols="4">
           <v-btn 
             variant="outlined"
@@ -14,7 +14,7 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row justify="center">
         <v-col cols="4">
           <v-btn 
             variant="outlined"
@@ -28,22 +28,23 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row justify="center">
         <v-col cols="4">
           <v-btn 
             variant="outlined"
             id="endgame"
             block
             size="x-large"
+            @click="endGame"
           >
             Spiel beenden
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
-    <StatInterface v-if="statsDisplayed" />
-  </div>
-</template>
+    <StatInterface v-if="statsDisplayed" @backToMenu="backToMenu"/>
+</div>
+  </template>
     
   <script>
     import StatInterface from './StatInterface.vue';
@@ -70,6 +71,12 @@
           } else {
             this.statsDisplayed = true
           }
+        },
+        endGame(){
+          close();
+        },
+        backToMenu(){
+          this.statsDisplayed = false;
         }
       }
     }
@@ -80,7 +87,7 @@
       height: 300px;
     }
 
-    .v-btn {
-      justify-content: left !important;
+    .center{
+      text-align: center;
     }
   </style>
