@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "watch": "nodemon ./bin/www"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
@@ -17,6 +18,7 @@
     "express-generator": "^4.2.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "nodemon": "^3.0.3",
     "pug": "^3.0.2",
     "roboto-fontface": "*",
     "vue": "^3.3.0",

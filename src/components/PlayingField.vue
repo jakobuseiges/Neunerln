@@ -3,7 +3,7 @@
       <v-row id="player1-hand" class="player-hand">
         <v-col>
           <v-img
-            src="../assets/cards/EichelAcht.png"
+            src="../assets/cards/Eichel_Acht.png"
           ></v-img>
         </v-col>
       </v-row>
@@ -11,7 +11,7 @@
       <v-row id="neutral-area">
         <v-col>
           <v-img
-            src="../assets/cards/EichelAcht.png"
+            src="../assets/cards/Eichel_Acht.png"
           ></v-img>
         </v-col>
         <CardStack 
@@ -22,7 +22,7 @@
       <v-row id="player2-hand" class="player-hand">
         <v-col>
           <v-img
-            src="../assets/cards/EichelAcht.png"
+            src="../assets/cards/Eichel_Acht.png"
           ></v-img>
         </v-col>
       </v-row>

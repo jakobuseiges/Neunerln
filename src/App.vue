@@ -31,11 +31,11 @@
     methods: {
       async createCards() {
         let url = 'http://localhost:8000/functions/getCards'
-        this.cards = await axios({
+        let response = await axios({
           method: 'get',
           url
         })
-        console.log(this.cards)
+        console.log(response.data)
       }
     }
   }

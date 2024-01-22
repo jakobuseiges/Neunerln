@@ -3,7 +3,7 @@
       class="playing-card"
     >
       <v-img
-        src="../assets/cards/GrasOber.png"
+        src="../assets/cards/Gras_Ober.png"
         @click="drawCard"
       ></v-img>
     </v-col>
