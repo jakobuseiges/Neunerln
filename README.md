@@ -74,4 +74,7 @@ This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library wi
 ## 📑 License
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016-present Vuetify, LLC
+
+# Interessante Links
+- [Multipage Ansatz von Vite](https://vitejs.dev/guide/build.html#multi-page-app)
+
