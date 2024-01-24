@@ -35,7 +35,7 @@
           method: 'get',
           url
         })
-        console.log(response.data)
+        this.cards = response.data
       }
     }
   }
