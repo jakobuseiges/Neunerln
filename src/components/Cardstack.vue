@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { toRaw } from 'vue';
 
 export default {
   name: "PlayingCard",
@@ -33,6 +34,9 @@ export default {
   },
 
   methods: {
+    updatePlayerHands(){
+      this.$emit("updatePlayerHands", this.player1_hand, this.player2_hand)
+    },
     drawCard() {
       if (this.cards.length > 0) {
         let index = Math.floor(Math.random() * this.cards.length);
@@ -44,8 +48,9 @@ export default {
         if (this.cards.length <= 0) {
           this.cardstackImage = "src/assets/cards/Leerer_Stapel.png";
         }
+        this.updatePlayerHands()
       }
-    }
+    },
   }
 };
 </script>
