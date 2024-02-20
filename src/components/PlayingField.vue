@@ -1,9 +1,9 @@
   <template>
     <v-container fluid>
       <v-row id="player1-hand" class="player-hand">
-        <v-col>
+        <v-col v-for="card in player1_hand">
           <v-img
-            src="../assets/cards/Eichel_Acht.png"            
+            :src="card.path"            
           ></v-img>         
         </v-col>
       </v-row>
@@ -16,15 +16,14 @@
         </v-col>
         <CardStack 
           :cards="cards"
-          @updatePlayerHands="updatePlayerHands"
+          @drawCard="drawCard"
         />
       </v-row>
       <v-divider color="warning" thickness="6px" class="mb-5 mt-5"></v-divider>
       <v-row id="player2-hand" class="player-hand">
-        <v-col>
+        <v-col v-for="card in player2_hand">
           <v-img
-            src="../assets/cards/Eichel_Acht.png"
-            @click="ShowCards"
+            :src="card.path"
           ></v-img>
         </v-col>
       </v-row>
@@ -51,6 +50,7 @@
 
       data () {       
         return {
+          activePlayer: 1,
           player1_hand: [],
           player2_hand: [],
           laying_card: "src/assets/cards/Karten_Rückseite.png"
@@ -61,14 +61,21 @@
         createCards () {
           this.$emit('createCards')
         },
-        updatePlayerHands(player1, player2){
-          this.player1_hand = player1
-          this.player2_hand = player2
+        manageTurns () {
+          if (this.activePlayer === 1) {
+            this.activePlayer = 2
+          } else {
+            this.activePlayer = 1
+          }
         },
-        ShowCards(){
-          toRaw(this.player1_hand).forEach(element => {
-            console.log(element.symbol + " " + element.value)
-          });
+        drawCard (card) {
+          console.log(this.activePlayer)
+          if (this.activePlayer === 1) {
+            this.player1_hand.push(card)
+          } else {
+            this.player2_hand.push(card)
+          }
+          this.manageTurns()
         },
       }
     }

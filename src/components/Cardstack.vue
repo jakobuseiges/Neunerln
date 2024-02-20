@@ -20,36 +20,22 @@ export default {
 
   data: () => ({
     model: null,
-    player1_hand: [],
-    player2_hand:[],
-    ablagestapel: [],
     cardstackImage: "src/assets/cards/Karten_Rückseite.png"
   }),
 
-  created() {
-    let index = Math.floor(Math.random() * this.cards.length);
-    const randomCard = this.cards[index];
-    this.ablagestapel.push(randomCard);
-    this.cards.splice(index, 1);
-  },
-
   methods: {
-    updatePlayerHands(){
-      this.$emit("updatePlayerHands", this.player1_hand, this.player2_hand)
-    },
     drawCard() {
+      let randomCard
       if (this.cards.length > 0) {
-        let index = Math.floor(Math.random() * this.cards.length);
-        const randomCard = this.cards[index];
-        this.player1_hand.push(randomCard);
-        this.cards.splice(index, 1);
-        this.player1_hand.forEach(element => {});
-        console.log(this.cards.length);
+        let index = Math.floor(Math.random() * this.cards.length)
+        randomCard = this.cards[index]
+        this.cards.splice(index, 1)
+        console.log(this.cards.length)
         if (this.cards.length <= 0) {
           this.cardstackImage = "src/assets/cards/Leerer_Stapel.png";
         }
-        this.updatePlayerHands()
       }
+      this.$emit('drawCard', randomCard)
     },
   }
 };
