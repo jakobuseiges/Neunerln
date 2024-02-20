@@ -53,7 +53,7 @@
           activePlayer: 1,
           player1_hand: [],
           player2_hand: [],
-          laying_card: "src/assets/cards/Karten_Rückseite.png"
+          laying_card: "src/assets/neutralCards/Karten_Rückseite.png"
         }
       },
 

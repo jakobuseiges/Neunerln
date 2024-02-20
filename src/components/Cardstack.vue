@@ -20,7 +20,7 @@ export default {
 
   data: () => ({
     model: null,
-    cardstackImage: "src/assets/cards/Karten_Rückseite.png"
+    cardstackImage: "src/assets/neutralCards/Karten_Rückseite.png"
   }),
 
   methods: {
@@ -32,7 +32,7 @@ export default {
         this.cards.splice(index, 1)
         console.log(this.cards.length)
         if (this.cards.length <= 0) {
-          this.cardstackImage = "src/assets/cards/Leerer_Stapel.png";
+          this.cardstackImage = "src/assets/neutralCards/Leerer_Stapel.png";
         }
       }
       this.$emit('drawCard', randomCard)
