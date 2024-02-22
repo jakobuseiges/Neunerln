@@ -30,7 +30,6 @@ export default {
         let index = Math.floor(Math.random() * this.cards.length)
         randomCard = this.cards[index]
         this.cards.splice(index, 1)
-        console.log(this.cards.length)
         if (this.cards.length <= 0) {
           this.cardstackImage = "src/assets/neutralCards/Leerer_Stapel.png";
         }

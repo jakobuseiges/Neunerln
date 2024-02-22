@@ -37,7 +37,6 @@
         })
         // Rückseite und Leere Karte muss noch aus dem Array entfernt werden, bevor sie ausgeteilt werdens
         this.cards = response.data
-        console.log(this.cards)
       }
     }
   }

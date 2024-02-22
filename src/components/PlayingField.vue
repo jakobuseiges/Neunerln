@@ -1,9 +1,10 @@
   <template>
     <v-container fluid>
       <v-row id="player1-hand" class="player-hand">
-        <v-col v-for="card in player1_hand">
+        <v-col v-for="(card, index) in player1_hand">
           <v-img
-            :src="card.path"            
+            :src="card.path"
+            @click="playCard(card, index)"
           ></v-img>         
         </v-col>
       </v-row>
@@ -24,6 +25,7 @@
         <v-col v-for="card in player2_hand">
           <v-img
             :src="card.path"
+            @click="playCard(card, index)"
           ></v-img>
         </v-col>
       </v-row>
@@ -32,7 +34,6 @@
     
   <script>
     import CardStack from './Cardstack.vue'
-    import { toRaw } from 'vue'
     
     export default {
       name: "PlayingField",
@@ -69,7 +70,6 @@
           }
         },
         drawCard (card) {
-          console.log(this.activePlayer)
           if (this.activePlayer === 1) {
             this.player1_hand.push(card)
           } else {
@@ -77,6 +77,20 @@
           }
           this.manageTurns()
         },
+        playCard (card, index) {
+          console.log('TEST')
+          this.laying_card = card.path
+          if (this.activePlayer === 1) {
+            console.log(index)
+            // hier muss noch überprüft werden, ob die angeklickte Karte überhaubt in der Hand gefunden wird 
+            // --> Karte soll nur gespielt werden, wenn der Spieler auch am Zug ist
+            this.player1_hand = this.player1_hand.splice((index, 1))
+            console.log(this.player1_hand)
+          } else {
+            this.player2_hand = this.player2_hand.splice((index, 1))
+          }
+          this.manageTurns()
+        }
       }
     }
   </script>
