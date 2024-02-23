@@ -21,6 +21,8 @@
     "nodemon": "^3.0.3",
     "pug": "^3.0.2",
     "roboto-fontface": "*",
+    "sqlite3": "^5.1.7",
+    "tedious": "^17.0.0",
     "vue": "^3.3.0",
     "vue-router": "^4.2.5",
     "vuetify": "^3.0.0"

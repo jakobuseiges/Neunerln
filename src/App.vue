@@ -7,6 +7,11 @@
     :cards="cards"
     @createCards="createCards"
   />
+  <v-btn
+    @click="getPlayer('rafael', '')"
+  >
+    Button
+  </v-btn>
 </template>
 
 <script>
@@ -34,6 +39,17 @@
         let response = await axios({
           method: 'get',
           url
+        })
+      },
+      async getPlayer (username, password) {
+        let url = 'http://localhost:8000/functions/getPlayers'
+        let response = await axios({
+          method: 'get',
+          url,
+          params: {
+            username,
+            password
+          }
         })
         console.log(response.data)
       }
