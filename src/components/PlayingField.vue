@@ -1,7 +1,7 @@
   <template>
     <v-container fluid>
-      <v-row id="player1-hand" class="player-hand">
-        <v-col v-for="(card, index) in player1_hand">
+      <v-row id="player2-hand" class="player-hand">
+        <v-col v-for="(card, index) in player2_hand">
           <v-img
             :src="card.path"
             @click="playCard(card, index)"
@@ -21,8 +21,8 @@
         />
       </v-row>
       <v-divider color="warning" thickness="6px" class="mb-5 mt-5"></v-divider>
-      <v-row id="player2-hand" class="player-hand">
-        <v-col v-for="card in player2_hand">
+      <v-row id="player1-hand" class="player-hand">
+        <v-col v-for="(card, index) in player1_hand">
           <v-img
             :src="card.path"
             @click="playCard(card, index)"
@@ -54,6 +54,7 @@
           activePlayer: 1,
           player1_hand: [],
           player2_hand: [],
+          ablage_stapel: [],
           laying_card: "src/assets/neutralCards/Karten_Rückseite.png"
         }
       },
@@ -61,7 +62,10 @@
       methods: {
         createCards () {
           this.$emit('createCards')
+          this.giveOutCards()
+          this.setFirstCard()
         },
+
         manageTurns () {
           if (this.activePlayer === 1) {
             this.activePlayer = 2
@@ -69,6 +73,7 @@
             this.activePlayer = 1
           }
         },
+
         drawCard (card) {
           if (this.activePlayer === 1) {
             this.player1_hand.push(card)
@@ -77,21 +82,51 @@
           }
           this.manageTurns()
         },
+
         playCard (card, index) {
-          console.log('TEST')
           this.laying_card = card.path
           if (this.activePlayer === 1) {
             console.log(index)
             // hier muss noch überprüft werden, ob die angeklickte Karte überhaubt in der Hand gefunden wird 
             // --> Karte soll nur gespielt werden, wenn der Spieler auch am Zug ist
             this.player1_hand = this.player1_hand.splice((index, 1))
-            console.log(this.player1_hand)
-          } else {
+            this.ablage_stapel.push(card)
+            this.laying_card = this.ablage_stapel[this.ablage_stapel.length].path
+          } 
+          else {
             this.player2_hand = this.player2_hand.splice((index, 1))
+            this.ablage_stapel.push(card)
+            this.laying_card = this.ablage_stapel[this.ablage_stapel.length].path
           }
           this.manageTurns()
-        }
-      }
+        },
+
+        giveOutCards(){
+          for(let i = 0; i < 10; i++){
+          let randomCard
+          if (this.cards.length > 0) {
+            let index = Math.floor(Math.random() * this.cards.length)
+            randomCard = this.cards[index]
+            this.cards.splice(index, 1)
+            if (this.cards.length <= 0) {
+                this.cardstackImage = "src/assets/neutralCards/Leerer_Stapel.png";
+            }
+          }
+          this.drawCard(randomCard)
+          }
+        },
+
+        setFirstCard(){
+          let randomCard
+          if (this.cards.length > 0) {
+            let index = Math.floor(Math.random() * this.cards.length)
+            randomCard = this.cards[index]
+            this.cards.splice(index, 1)
+            this.ablage_stapel.push(randomCard)
+            this.laying_card = this.ablage_stapel[0].path
+          } 
+        },
+    }
     }
   </script>
   
