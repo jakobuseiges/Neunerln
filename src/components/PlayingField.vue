@@ -89,40 +89,10 @@ export default {
         card.value === "Neun"
       ) {
         if (this.activePlayer === 1) {
-          if(!this.player1_hand.includes(card)){
-            alert("Dieser Spieler ist nicht dran!")
-            this.manageTurns()
-          }
-          else{
-          this.player1_hand.splice(this.player1_hand.indexOf(card),1)
-          this.player1_hand = this.player1_hand.splice(card);
-          this.ablage_stapel.push(card);
-          this.laying_card = this.ablage_stapel[this.ablage_stapel.length-1].path;
-          if(this.player1_hand.length == 0){
-            alert("Spieler 1 hat gewonnen!")
-          }
-          if (card.value == "Acht"){
-            this.manageTurns()
-          }
-          }
+          this.playerPlaysCard(this.player1_hand, card)
         }
         else{
-          if(!this.player2_hand.includes(card)){
-            alert("Dieser Spieler ist nicht dran!")
-            this.manageTurns()
-          }
-          else {
-          this.player2_hand.splice(this.player2_hand.indexOf(card),1)
-          this.player2_hand = this.player2_hand.splice(card);
-          this.ablage_stapel.push(card);
-          this.laying_card = this.ablage_stapel[this.ablage_stapel.length-1].path;
-          if(this.player2_hand.length == 0){
-            alert("Spieler 2 hat gewonnen!")
-          }
-          if (card.value == "Acht"){
-            this.manageTurns()
-          }
-          }
+          this.playerPlaysCard(this.player2_hand, card)
         }
         this.manageTurns();
       } else {
@@ -155,6 +125,24 @@ export default {
         this.ablage_stapel.push(randomCard);
         this.laying_card = this.ablage_stapel[0].path;
       }
+    },
+
+    playerPlaysCard(playerHand, card){
+      if(!playerHand.includes(card)){
+            alert("Dieser Spieler ist nicht dran!")
+            this.manageTurns()
+          }
+          else{
+          playerHand.splice(playerHand.indexOf(card),1)
+          this.ablage_stapel.push(card);
+          this.laying_card = this.ablage_stapel[this.ablage_stapel.length-1].path;
+          if(playerHand.length === 0){
+            alert("Spieler 1 hat gewonnen!")
+          }
+          if (card.value == "Acht"){
+            this.manageTurns()
+          }
+          }
     }
   }
 };
