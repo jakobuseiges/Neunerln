@@ -8,7 +8,7 @@
     <v-divider color="warning" thickness="6px" class="mb-5 mt-5"></v-divider>
     <v-row id="neutral-area">
       <v-col>
-        <v-img :src="laying_card" @click="DebugCard()"></v-img>
+        <v-img :src="laying_card"></v-img>
       </v-col>
       <CardStack :cards="cards" @drawCard="drawCard" />
     </v-row>
@@ -54,13 +54,7 @@ export default {
       this.giveOutCards();
       this.setFirstCard();
     },
-    DebugCard() {
-      console.log(
-        this.ablage_stapel[this.ablage_stapel.length - 1].symbol +
-          " " +
-          this.ablage_stapel[this.ablage_stapel.length - 1].value
-      );
-    },
+
     manageTurns() {
       if (this.activePlayer === 1) {
         this.activePlayer = 2;
@@ -107,6 +101,9 @@ export default {
           if(this.player1_hand.length == 0){
             alert("Spieler 1 hat gewonnen!")
           }
+          if (card.value == "Acht"){
+            this.manageTurns()
+          }
           }
         }
         else{
@@ -121,6 +118,9 @@ export default {
           this.laying_card = this.ablage_stapel[this.ablage_stapel.length-1].path;
           if(this.player2_hand.length == 0){
             alert("Spieler 2 hat gewonnen!")
+          }
+          if (card.value == "Acht"){
+            this.manageTurns()
           }
           }
         }
