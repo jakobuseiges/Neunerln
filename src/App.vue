@@ -1,4 +1,5 @@
 <template>
+  <NavBar/>
   <!-- <MenuInterface /> -->
   <!-- <PlayingCard
     :cardRef="cardRef"
@@ -8,9 +9,14 @@
     @createCards="createCards"
   />
   <v-btn
-    @click="getPlayer('rafael', '')"
+    @click="getPlayer('jakob', 'test2')"
   >
-    Button
+    Spieler bekommen
+  </v-btn>
+  <v-btn
+    @click="addPlayer('jakob', 'test2')"
+  >
+    Spieler hinzufügen
   </v-btn>
 </template>
 
@@ -42,7 +48,19 @@
         })
       },
       async getPlayer (username, password) {
-        let url = 'http://localhost:8000/functions/getPlayers'
+        let url = 'http://localhost:8000/functions/getPlayer'
+        let response = await axios({
+          method: 'get',
+          url,
+          params: {
+            username,
+            password
+          }
+        })
+        console.log(response.data)
+      },
+      async addPlayer (username, password) {
+        let url = 'http://localhost:8000/functions/addPlayer'
         let response = await axios({
           method: 'get',
           url,

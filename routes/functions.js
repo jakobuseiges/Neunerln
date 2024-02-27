@@ -1,11 +1,8 @@
 var express = require('express')
 var router = express.Router()
 const sqlite3 = require('sqlite3')
-let sql
 let fs = require('fs')
 var path = require('path')
-
-const heros = []
 
 /* GET users listing. */
 router.get('/getCards', function(req, res, next) {
@@ -31,23 +28,24 @@ router.get('/getCards', function(req, res, next) {
   res.send(cards)
 })
 
-router.get('/getPlayers', function(req, res, next) {
+router.get('/getPlayer', function(req, res, next) {
 
-  console.log(req.query)
-  let db = new sqlite3.Database('mcu.db')
+  console.log('query: ', req.query)
+  let db = new sqlite3.Database('neunerln.db')
   // funktioniert noch nicht --> Select muss noch überarbeitet werden
-  db.all(`SELECT * FROM users`, function (err, rows) {
+  db.all(`SELECT * FROM users WHERE username="${req.query.username}" AND password="${req.query.password}"`, function (err, rows) {
     rows.forEach(row => {
-      console.log(row.ID, row.username, row.playedGames, row.wonGames)
+      console.log(row.username, row.password, row.playedGames, row.wonGames)
     })
     db.close()
   })
 }),
 
-router.get('/addPlayers', function(req, res, next) {
-  let db = new sqlite3.Database('mcu.db')
+router.get('/addPlayer', function(req, res, next) {
+  let db = new sqlite3.Database('neunerln.db')
+  console.log(req.query)
 
-  db.run(`INSERT INTO users (username, playedGames, wonGames) VALUES ('rafael', 1, 1)`, function(err) {
+  db.run(`INSERT INTO users (username, password, playedGames, wonGames) VALUES ('${req.query.username}', '${req.query.password}', 0, 0)`, function(err) {
     if (err) {
       return console.log(err.message)
     }
