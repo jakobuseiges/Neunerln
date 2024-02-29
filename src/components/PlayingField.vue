@@ -63,25 +63,42 @@ export default {
       }
     },
 
-    drawCard(card) {
+    drawCard(card, forced) {
       if (this.activePlayer === 1) {
         this.player1_hand.push(card);
-        if(this.ablage_stapel.length > 0){
-        if (card.symbol != this.ablage_stapel[this.ablage_stapel.length - 1].symbol && card.value != this.ablage_stapel[this.ablage_stapel.length - 1].value && card.value != "Neun"){
-          this.manageTurns()
-        }
+        if (this.ablage_stapel.length > 0) {
+          this.player1_hand.forEach(c => {
+            if (
+              c.symbol !=
+                this.ablage_stapel[this.ablage_stapel.length - 1].symbol &&
+              c.value !=
+                this.ablage_stapel[this.ablage_stapel.length - 1].value &&
+              c.value != "Neun" &&
+              forced == false
+            )
+              this.manageTurns();
+          });
         }
       } else {
         this.player2_hand.push(card);
-        if(this.ablage_stapel.length > 0){
-        if (card.symbol != this.ablage_stapel[this.ablage_stapel.length - 1].symbol && card.value != this.ablage_stapel[this.ablage_stapel.length - 1].value && card.value != "Neun"){
-          this.manageTurns()
-        }
+        if (this.ablage_stapel.length > 0) {
+          this.player2_hand.forEach(c => {
+            if (
+              c.symbol !=
+                this.ablage_stapel[this.ablage_stapel.length - 1].symbol &&
+              c.value !=
+                this.ablage_stapel[this.ablage_stapel.length - 1].value &&
+              c.value != "Neun" &&
+              forced == false
+            )
+              this.manageTurns();
+          });
         }
       }
     },
 
     playCard(card, index) {
+      console.log(card.value);
       if (
         card.symbol ==
           this.ablage_stapel[this.ablage_stapel.length - 1].symbol ||
@@ -89,10 +106,9 @@ export default {
         card.value === "Neun"
       ) {
         if (this.activePlayer === 1) {
-          this.playerPlaysCard(this.player1_hand, card)
-        }
-        else{
-          this.playerPlaysCard(this.player2_hand, card)
+          this.playerPlaysCard(this.player1_hand, card);
+        } else {
+          this.playerPlaysCard(this.player2_hand, card);
         }
         this.manageTurns();
       } else {
@@ -102,17 +118,8 @@ export default {
 
     giveOutCards() {
       for (let i = 0; i < 10; i++) {
-        let randomCard;
-        if (this.cards.length > 0) {
-          let index = Math.floor(Math.random() * this.cards.length);
-          randomCard = this.cards[index];
-          this.cards.splice(this.cards.indexOf(randomCard), 1);
-          if (this.cards.length <= 0) {
-            this.cardstackImage = "src/assets/neutralCards/Leerer_Stapel.png";
-          }
-        }
-        this.drawCard(randomCard);
-        this.manageTurns()
+        this.drawCard(this.getRandomCard());
+        this.manageTurns();
       }
     },
 
@@ -127,22 +134,44 @@ export default {
       }
     },
 
-    playerPlaysCard(playerHand, card){
-      if(!playerHand.includes(card)){
-            alert("Dieser Spieler ist nicht dran!")
-            this.manageTurns()
-          }
-          else{
-          playerHand.splice(playerHand.indexOf(card),1)
-          this.ablage_stapel.push(card);
-          this.laying_card = this.ablage_stapel[this.ablage_stapel.length-1].path;
-          if(playerHand.length === 0){
-            alert("Spieler 1 hat gewonnen!")
-          }
-          if (card.value == "Acht"){
-            this.manageTurns()
-          }
-          }
+    playerPlaysCard(playerHand, card) {
+      if (!playerHand.includes(card)) {
+        alert("Dieser Spieler ist nicht dran!");
+        this.manageTurns();
+      } else {
+        playerHand.splice(playerHand.indexOf(card), 1);
+        this.ablage_stapel.push(card);
+        this.laying_card = this.ablage_stapel[
+          this.ablage_stapel.length - 1
+        ].path;
+        if (playerHand.length === 0) {
+          alert("Spieler 1 hat gewonnen!");
+        }
+        if (card.value == "Acht") {
+          this.manageTurns();
+        }
+        if (card.value == "Sieben") {
+          this.takeTwo();
+        }
+      }
+    },
+
+    takeTwo() {
+      this.drawCard(this.getRandomCard(), true);
+      this.drawCard(this.getRandomCard(), false);
+    },
+
+    getRandomCard() {
+      let randomCard;
+      if (this.cards.length > 0) {
+        let index = Math.floor(Math.random() * this.cards.length);
+        randomCard = this.cards[index];
+        this.cards.splice(this.cards.indexOf(randomCard), 1);
+        if (this.cards.length <= 0) {
+          this.cardstackImage = "src/assets/neutralCards/Leerer_Stapel.png";
+        }
+      }
+      return randomCard;
     }
   }
 };
